@@ -1,0 +1,5 @@
+<div class="row container" *ngIf="accounts$ | async as accounts">
+  <app-account-card class="col-4" *ngFor="let account of accounts" [account]="account"
+    (click)="modalService.open(account)">
+  </app-account-card>
+</div>

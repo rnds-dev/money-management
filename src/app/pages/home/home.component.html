@@ -1,0 +1,16 @@
+<!-- <div class="container">
+<button class="filled" (click)="check()">Check</button>
+</div> -->
+
+<app-toolbar (sendArrayToParent)="getSelectedPeriod($event)"></app-toolbar>
+<app-total [selectedPeriod]="selectedPeriod"></app-total>
+
+<div class="container">
+<select name="" id="" [(ngModel)]="type">
+  <option value="Budget">Budget</option>
+  <option value="Chart">Chart</option>
+</select>
+</div>
+
+<app-budget *ngIf="type=='Budget'" [selectedPeriod]="selectedPeriod"></app-budget>
+<app-chart-stats *ngIf="type=='Chart'" [selectedPeriod]="selectedPeriod"></app-chart-stats>

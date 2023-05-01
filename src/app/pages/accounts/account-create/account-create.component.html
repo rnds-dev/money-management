@@ -1,0 +1,10 @@
+<form class="toolbar container" action="" [formGroup]="newAccount" (ngSubmit)="onCreateAccount()">
+
+  <input type="text" placeholder="id" hidden> 
+  <input type="text" placeholder="Name" formControlName="name"> 
+  <input type="text" placeholder="Initial sum" formControlName="sum"> 
+  <input type="text" placeholder="Description" formControlName="description">
+
+  <button type="submit" class="filled">Create</button>
+  
+</form>

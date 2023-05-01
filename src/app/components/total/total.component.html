@@ -1,0 +1,6 @@
+<div class="container">
+  <h5>Result</h5>
+  <p>Income: {{ stats["Income"] | number:'0.2-2' }}</p>
+  <p>Expenses: {{ stats["Expense"] | number:'0.2-2'}}</p>
+  <p>Total: {{ stats["Income"] + stats["Expense"] | number:'0.2-2' }} </p>
+</div>

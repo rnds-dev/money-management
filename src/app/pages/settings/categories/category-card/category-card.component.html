@@ -1,0 +1,21 @@
+<!-- <form action="">
+  <select name="" id="" [value]="category.type">
+    <option value=""></option>
+  </select>
+  <input type="text" [value]="category.name">
+  <input type="text" [value]="category.budget">
+  <button class="outlined">Save</button>
+</form> -->
+
+
+<form class="article" [formGroup]="this.formCategory" (ngSubmit)="updateCategory()">
+  <select
+    formControlName="type"
+    *ngIf="types$ | async as types">
+    <option *ngFor="let type of types" [value]="type.name">{{type.name}}</option>
+  </select>
+  <input formControlName="name" type="text" placeholder="Name">
+  <input formControlName="budget" type="text" placeholder="Budget">
+  <button class="outlined">Save</button>
+  <button class="outlined" (click)="delete()">Delete</button>
+</form>

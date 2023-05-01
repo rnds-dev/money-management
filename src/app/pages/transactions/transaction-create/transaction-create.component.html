@@ -1,0 +1,54 @@
+
+<form class="toolbar container" action="" [formGroup]="newTransaction" (ngSubmit)="create()">
+
+  <select
+    formControlName="type"
+    *ngIf="types$ | async as types"
+    (ngModelChange)="onChangeCategories()"
+    >
+    <option [value]="null" disabled>Type</option>
+    <option *ngFor="let type of types" [value]="type.name">{{type.name}}</option>
+  </select>
+  
+
+  <ng-container *ngIf=" newTransaction.value.type !== 'Transfer' ">
+    <select
+      formControlName="category"
+      *ngIf="(categories$ | async) as categories"
+      >
+      <option [value]="null" disabled>Category</option>
+      <ng-container *ngFor="let category of categories">
+
+        <option *ngIf="category.type === newTransaction.value.type" [value]="category.name">{{category.name}}</option>
+      </ng-container>
+    </select>
+  </ng-container>
+
+  <select
+    formControlName="account"
+    *ngIf="(accounts$ | async) as accounts"
+    >
+    <option [value]="null" disabled>Account</option>
+    <option *ngFor="let account of accounts" [value]="account.name">{{account.name}}</option>
+  </select>
+
+  <ng-container *ngIf=" newTransaction.value.type === 'Transfer' ">
+    <select 
+      formControlName="to_account"
+      *ngIf="(accounts$ | async) as to_accounts"
+      >
+      <option [value]="null" disabled>To account</option>
+      <ng-container *ngFor="let to_account of to_accounts">
+        <option *ngIf="to_account.name !== newTransaction.value.account" [value]="to_account.name">{{to_account.name}}</option>
+      </ng-container>
+    </select>
+  </ng-container>
+
+
+  <input type="text" name="" id="" placeholder="Sum" formControlName="sum">
+  <input type="text" name="" id="" placeholder="Fees" formControlName="fees">
+  <input type="date" name="" id="" placeholder="Date" formControlName="date">
+  <input type="text" name="" id="" placeholder="Description" formControlName="description">
+
+  <button type="submit" class="filled">Create</button>
+</form>

@@ -1,0 +1,25 @@
+<div class="wide-card">
+<p>{{transaction.type}}</p>
+<div class="date">
+  <h6 *ngIf="transaction.date">{{transaction.date}}</h6>
+</div>
+
+<div class="info">
+  <h6>{{transactionCategory}}</h6>
+  <p class="description" *ngIf="transaction.description">{{transaction.description}}</p>
+</div>
+
+<div class="accounts">
+  <h6>{{transaction.account}}</h6>
+  <h6 *ngIf="transaction.to_account">{{transaction.to_account}}</h6>
+</div>
+
+<div class="sum" >
+  <h6 [class.isGreen]="transaction.sum>=0">{{transaction.sum}}</h6>
+  <p class="description" *ngIf="transaction.fees">Fees: {{transaction.fees}}</p>
+</div>
+
+<div class="actions">
+  <button (click)="delete()" class="outlined">Delete</button>
+</div>
+</div>

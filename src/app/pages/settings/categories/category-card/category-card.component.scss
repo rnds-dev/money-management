@@ -1,0 +1,9 @@
+.article {
+  margin-bottom: 1.5rem;
+
+}
+form{
+  & > * {
+    margin-right: 1rem;
+  }
+}

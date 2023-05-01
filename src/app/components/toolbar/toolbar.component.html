@@ -1,0 +1,43 @@
+<div class="container">
+  <form class="row" action="" 
+  [formGroup]="period"
+  (change)="onSelectedPeriodChange()"
+  >
+    <div class="dates">
+      <button class="" (click)="changePeriod(-1)"><</button>
+      <input formControlName="startDate" type="date" placeholder="startDate">
+      <span>-</span>
+      <input formControlName="endDate" type="date" placeholder="endDate">
+      <button class="" (click)="changePeriod(1)">></button>
+    </div>
+
+    <!-- <select formControlName="type" *ngIf="types$ | async as types">
+      <ng-container *ngFor="let type of types">
+        <option *ngIf="type.name!='Transfer'" [value]="type.name">{{type.name}}</option>
+      </ng-container>
+    </select> -->
+    <!-- 
+    <ng-container *ngIf="filteredTransactions.value.type!=='Transfer'">
+    <label for="">Category</label>
+    <select
+      formControlName="category"
+      *ngIf="categories$ | async as categories">
+      <ng-container *ngFor="let category of categories">
+          <option *ngIf="category.type === filteredTransactions.value.type" [value]="category.name">{{category.name}}</option>
+      </ng-container>
+    </select>
+  </ng-container>
+
+    <label for="">Account</label>
+    <select
+    formControlName="account"
+    *ngIf="accounts$ | async as accounts">
+      <option *ngFor="let account of accounts" [value]="account.id">{{account.name}}</option>
+    </select>
+
+
+    <label for="">Sum</label>
+    <input formControlName="from_sum" type="text" placeholder="From">
+    <input formControlName="to_sum" type="text" placeholder="To">  -->
+  </form>
+</div>

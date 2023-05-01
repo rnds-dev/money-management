@@ -1,0 +1,26 @@
+<section class="container">
+  <form novalidate>
+    <!-- [formGroup]="form" (ngSubmit)="submit()" -->
+    <div class="row">
+      <app-dropdown [title]="transactionTypesTitle" [list]="transactionTypes"
+        (sendArrayToParent)="getSelectedTypes($event)"></app-dropdown>
+
+      <app-dropdown [title]="transactionCategoriesTitle" [list]="transactionCategories"
+        (sendArrayToParent)="getSelectedCategories($event)"></app-dropdown>
+      
+      <app-dropdown [title]="transactionAccountsTitle" [list]="transactionAccounts"
+        (sendArrayToParent)="getSelectedAccounts($event)"></app-dropdown>
+    </div>
+    <!-- <button class="outlined" type="submit">Submit</button> -->
+  </form>
+</section>
+
+
+<div class="container" *ngIf="transactions$ | async as transactions">
+  <ng-container *ngFor="let transaction of transactions">
+    <app-transaction-card
+      *ngIf="checkTransaction(transaction)"
+      [transaction]="transaction">
+    </app-transaction-card>
+  </ng-container>
+</div>

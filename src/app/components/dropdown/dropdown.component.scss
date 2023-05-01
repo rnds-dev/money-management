@@ -1,0 +1,47 @@
+@import '../../../assets/scss/colors.scss';
+@import '../../../assets/scss/settings.scss';
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  button {
+    background: $surface;
+    padding: .4rem 0.25rem;
+    min-width: 160px;
+  }
+
+}
+
+.dropdown-content {
+
+  // top: 35px;
+  display: none;
+  background-color: $surface;
+  min-width: 16rem;
+  border-radius: $radius;
+
+  position: absolute;
+  // z-index: 1;
+  // padding-top: .8rem;
+
+  // &::before {
+  //   content: '';
+  //   background: transparent;
+  //   display: block;
+  //   width: 100%;
+  //   height: 3rem;
+  // }
+
+}
+
+.dropdown-option {
+  padding: .5rem 1rem;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown:hover .dropdown-content,
+.dropdown-content:hover {
+  display: block;
+}

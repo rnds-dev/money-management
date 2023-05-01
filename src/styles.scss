@@ -1,1 +1,176 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;800&display=swap');
+
+@import 'assets/scss/colors.scss';
+@import 'assets/scss/settings.scss';
+@import 'assets/scss/elements.scss';
+
+//Containers
+.container {
+  width: 100%;
+  padding: 0 0.75rem;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 5rem;
+
+  @media (min-width: 576px) {
+    max-width: 540px;
+  }
+
+  @media (min-width: 768px) {
+    max-width: 720px;
+  }
+
+  @media (min-width: 992px) {
+    max-width: 960px;
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 1140px;
+  }
+
+  @media (min-width: 1400px) {
+    max-width: 1320px;
+  }
+}
+
+$gap: 0.8rem;
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+}
+
+$cols: 12;
+
+@for $col from 1 to $cols+1 {
+  $value: calc(($col/$cols)*100% - $gap);
+
+  .col-#{$col} {
+    // flex: none;
+    width: $value;
+    // padding: 0.25rem;
+  }
+
+  .offset-#{$col} {
+    margin-left: $value;
+  }
+}
+
+//Text
+.title {
+  margin-bottom: 3.2rem;
+}
+
+.description {
+  opacity: 0.5;
+}
+
+//Cards
+.toolbar {
+  background: $surface;
+  // border-radius: 3.6rem;
+  border-radius: $radius;
+  padding: 1rem;
+  // margin-bottom: 3.2rem;
+
+
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: $surface;
+  // border-radius: 1.2rem;
+  border-radius: $radius;
+  height: 12.5rem;
+  padding: 1.6rem;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.wide-card {
+  display: flex;
+
+  // justify-content: space-between;
+  margin-bottom: 2.4rem;
+
+  // border: 1px solid gray;
+
+  &>* {
+    // border: 1px solid red;
+    flex: 20%;
+
+    display: flex;
+    flex-direction: column;
+    vertical-align: middle;
+    // justify-content: center;
+    padding: 0rem 1rem;
+  }
+
+  .actions {
+    // display: flex;
+    // justify-content: right;
+    // vertical-align:middle;
+  }
+}
+
+.error {
+  color: rgb(255, 93, 93);
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+app-modal,
+.modal {
+  background-color: $background;
+  // border-radius: 2.4rem;
+  border-radius: $radius;
+
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin-left: auto;
+  max-width: 960px;
+  top: 72px;
+  left: 72px;
+  right: 72px;
+  margin-right: auto;
+  height: calc(100% - 144px);
+
+  header {
+    padding: 1rem;
+  }
+
+  main {
+    padding: 7.2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+}
+
+.dates {
+  background-color: $surface;
+  border-radius: $radius;
+}
+
+.isRed {
+  color: $red;
+}
+.isGreen {
+  color: $green;
+}
+
+

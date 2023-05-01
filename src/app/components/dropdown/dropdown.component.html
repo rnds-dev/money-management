@@ -1,0 +1,10 @@
+<div class="dropdown">
+  <button class="">{{title}}</button>
+    <div class="dropdown-content" >
+      <div class="dropdown-option" *ngFor="let item of list">
+        <label>
+          <input type="checkbox" [value]="item.name" (change)="onCheckboxChange($event)" />{{item.name}}
+        </label>
+      </div>
+    </div>
+  </div>
