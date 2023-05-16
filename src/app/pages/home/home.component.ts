@@ -1,10 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { IAccount } from 'src/app/models/account';
-import { ICategoryStats, ITransaction, ITransactionCategory, ITransactionType } from 'src/app/models/transaction';
-import { DataService } from 'src/app/services/data.service';
-import { StatsService } from 'src/app/services/stats.service';
+import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 
 @Component({

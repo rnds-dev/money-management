@@ -1,14 +1,13 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ITransaction, ITransactionCategory, ITransactionType } from 'src/app/models/transaction';
+import { ITransaction } from 'src/app/models/transaction';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-transactions-list',
   templateUrl: './transactions-list.component.html',
 })
-export class TransactionsListComponent  implements OnInit, OnChanges {
+export class TransactionsListComponent  implements OnInit {
 
   transactionCategories: Array<any> = []
   selectedCategories: Array<string> = []
@@ -25,19 +24,6 @@ export class TransactionsListComponent  implements OnInit, OnChanges {
   transactions$!: Observable<ITransaction[]>
 
   constructor(private dataService: DataService) { }
-  ngOnChanges(changes: SimpleChanges): void {
-    
-    // this.dataService.getAll("transaction_categories").subscribe((categories) => {
-    //   categories.forEach((category: ITransactionCategory) => {
-    //     // if (this.selectedTypes.includes(category.type)) {
-    //       this.transactionCategories.push(category)
-    //       console.log(category);
-          
-    //     // }
-    //   });
-    //   // this.transactionCategories = categories
-    // })
-  }
   
   ngOnInit(): void {
     this.dataService.getAll("transaction_types").subscribe((types) => {

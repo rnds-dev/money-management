@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ICategoryStats, ITransaction, ITransactionCategory, ITypeStats } from '../models/transaction';
+import { ICategoryStats, ITransaction, ITransactionCategory, ITransactionType, ITypeStats } from '../models/transaction';
 import { DataService } from './data.service';
 
 @Injectable({
@@ -11,11 +11,21 @@ export class StatsService {
   // stats: any = {}
   constructor(private dataService: DataService) { } 
 
+  private setZeroTypeStats(stats: ITypeStats) : ITypeStats {
+    this.dataService.getAll("transaction_types").subscribe((types: ITransactionType[]) => {
+      types.forEach(type => {
+        stats[type.name] = 0
+      })
+    })
+    return stats
+  }
+
   getTypeStats(params: FormGroup) : ITypeStats {
     var stats: ITypeStats = {}
+    // this.setZeroTypeStats(stats)
+    
     this.dataService.getAll("transactions").subscribe((transactions: ITransaction[]) => {
       transactions.forEach(transaction => {
-        // if (transaction.type != type) return
         if (transaction.date && (
             transaction.date < params.value.startDate ||
             transaction.date > params.value.endDate)) return
@@ -25,7 +35,6 @@ export class StatsService {
         } else {
           stats[transaction.type] = transaction.sum
         }
-
       } //forEach function
       ) //forEach
     } //subscribe function

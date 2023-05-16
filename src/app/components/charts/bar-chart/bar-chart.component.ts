@@ -26,19 +26,15 @@ export class BarChartComponent implements OnInit, OnChanges {
           backgroundColor: this.mainColor,
           hoverBackgroundColor: this.mainColor,
           categoryPercentage: 0.1,
-          barPercentage:1,
-          borderRadius: Number.MAX_VALUE,
+          // barPercentage: 1,
+          // borderRadius: Number.MAX_VALUE,
           indexAxis: 'y',
-          
-          
-          
         }],
         labels: [],
-        
       },
       
       options: {
-        animation: false,
+        // animation: false,
         maintainAspectRatio: false,
         plugins: {
           

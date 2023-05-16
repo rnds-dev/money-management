@@ -18,7 +18,7 @@ export interface ITransactionCategory {
 }
 
 export interface ITransactionType { 
-  name: string 
+  name: string,
 }
 
 export interface ICategoryStats { [category: string]: number }

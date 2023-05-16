@@ -114,3 +114,7 @@ input[type="checkbox"] {
 label {
   font-size: 1.4rem;
 }
+
+table, td, tr {
+  border: 1px $primary solid;
+}

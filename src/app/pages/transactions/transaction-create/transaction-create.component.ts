@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { IAccount } from 'src/app/models/account';
 import { ITransactionCategory, ITransactionType } from 'src/app/models/transaction';
 import { DataService } from 'src/app/services/data.service';
+import { DateService } from 'src/app/services/date.service';
 
 @Component({
   selector: 'app-transaction-create',
@@ -24,11 +25,11 @@ export class TransactionCreateComponent implements OnInit {
     to_account: new FormControl(),
     sum: new FormControl(),
     fees: new FormControl(),
-    date: new FormControl(),
+    date: new FormControl(this.dateService.dateToString(new Date())),
     description: new FormControl()
   })
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private dateService: DateService) { }
 
   ngOnInit(): void {
     this.accounts$ = this.dataService.getAll("accounts")

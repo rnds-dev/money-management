@@ -1,12 +1,12 @@
 <header>
-<button class="filled" (click)="onCloseModal()">X</button>
-<button class="" (click)="onDeleteAccount()">Delete</button>
-<button class="" (click)="onUpdateAccount()">Save</button>
+  <button class="filled" (click)="onCloseModal()">X</button>
+  <button class="" (click)="onDeleteAccount()">Delete</button>
+  <button class="" (click)="onUpdateAccount()">Save</button>
 </header>
 
 <main>
-<input type="text" placeholder="id" [value]="account.id" hidden>
-<input type="text" placeholder="name" [(ngModel)]="account.name">
-<input type="text" placeholder="sum" [(ngModel)]="account.sum">
-<input type="text" placeholder="description" [value]="account.description ?  account.description : ''">
+  <input type="text" placeholder="id" [value]="account.id" hidden>
+  <input type="text" placeholder="name" [(ngModel)]="account.name">
+  <input type="text" placeholder="sum" [(ngModel)]="account.sum">
+  <input type="text" placeholder="description" [(ngModel)]="account.description">
 </main>

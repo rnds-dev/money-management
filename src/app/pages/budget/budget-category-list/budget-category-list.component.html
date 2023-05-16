@@ -1,10 +1,28 @@
 <div class="container" *ngIf="categories$ | async as categories">
   <ng-container *ngFor="let category of categories">
     <app-budget-category-card 
-      *ngIf="category.type=='Expense' && category.budget!>0"
       [category]="category"
       [status]="stats[category.name] ? stats[category.name] : 0"
       >
     </app-budget-category-card>
   </ng-container>
 </div>
+
+<!-- <table class="container" *ngIf="categories$ | async as categories">
+  <thead>
+  <tr>
+    <th>Category</th>
+    <th>Now</th>
+    <th>Plan</th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let category of categories">
+    <app-budget-category-card 
+      [category]="category"
+      [status]="stats[category.name] ? stats[category.name] : 0"
+      >
+    </app-budget-category-card>
+  </tr>
+</tbody>
+</table> -->
