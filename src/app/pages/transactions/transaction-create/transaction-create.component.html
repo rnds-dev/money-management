@@ -4,12 +4,10 @@
   <select
     formControlName="type"
     *ngIf="types$ | async as types"
-    (ngModelChange)="onChangeCategories()"
     >
     <option [value]="null" disabled>Type</option>
     <option *ngFor="let type of types" [value]="type.name">{{type.name}}</option>
   </select>
-  
 
   <ng-container *ngIf=" newTransaction.value.type !== 'Transfer' ">
     <select
@@ -18,7 +16,6 @@
       >
       <option [value]="null" disabled>Category</option>
       <ng-container *ngFor="let category of categories">
-
         <option *ngIf="category.type === newTransaction.value.type" [value]="category.name">{{category.name}}</option>
       </ng-container>
     </select>
@@ -50,5 +47,7 @@
   <input type="date" name="" id="" placeholder="Date" formControlName="date">
   <input type="text" name="" id="" placeholder="Description" formControlName="description">
 
-  <button type="submit" class="filled">Create</button>
+  <button [disabled]="newTransaction.invalid" type="submit" class="filled">Create</button>
 </form>
+
+<p></p>

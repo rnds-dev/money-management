@@ -56,29 +56,3 @@ export class TransactionsListComponent  implements OnInit {
     return true
   }
 }
-
-
-// form: FormGroup = new FormGroup({
-//   selectedTypes: new FormArray([]),
-//   selectedCategories: new FormArray([])
-// })
-
-// onCheckboxChange(event: any) {
-//   const selectedTypes = (this.form.controls['selectedTypes'] as FormArray);
-//   if (event.target.checked) {
-//     selectedTypes.push(new FormControl(event.target.value));
-//   } else {
-//     const index = selectedTypes.controls
-//     .findIndex(x => x.value === event.target.value);
-//     selectedTypes.removeAt(index);
-    
-//   }
-//   const selectedCategories = (this.form.controls['selectedCategories'] as FormArray);
-//   if (event.target.checked) {
-//     selectedCategories.push(new FormControl(event.target.value));
-//   } else {
-//     const index = selectedCategories.controls
-//     .findIndex(x => x.value === event.target.value);
-//     selectedCategories.removeAt(index);
-//   }
-// }

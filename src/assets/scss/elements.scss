@@ -59,15 +59,19 @@ button {
   &.outlined {
     background: none;
     border: $primary 1px solid;
+    color: white;
 
     &:hover {
       background-color: rgba($color: $primary, $alpha: 0.25);
     }
   }
 
-  // &:hover {
-  //   opacity: 0.5;
-  // }
+  &:disabled {
+    background: none;
+    border: $primary 1px solid;
+    color: white;
+    opacity: 0.5;
+  }
 }
 
 input {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { IAccount } from 'src/app/models/account';
 import { ITransactionCategory, ITransactionType } from 'src/app/models/transaction';
@@ -14,14 +14,13 @@ export class TransactionCreateComponent implements OnInit {
   accounts$!: Observable<IAccount[]>
   types$!: Observable<ITransactionType[]>
   categories$!: Observable<ITransactionCategory[]>
-  
-  selectedType: string = ""
-  selectedAccount!: number
 
   newTransaction: FormGroup = new FormGroup({
+    // [Validators.required]
     type: new FormControl(),
     category: new FormControl(),
     account: new FormControl(),
+
     to_account: new FormControl(),
     sum: new FormControl(),
     fees: new FormControl(),
@@ -35,11 +34,6 @@ export class TransactionCreateComponent implements OnInit {
     this.accounts$ = this.dataService.getAll("accounts")
     this.types$ = this.dataService.getAll("transaction_types")
     this.categories$ = this.dataService.getAll("transaction_categories")
-  }
-
-  onChangeCategories() {
-    // Move the category check to function create()
-    // this.newTransaction.value.category = null
   }
 
   create() {

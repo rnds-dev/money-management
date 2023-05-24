@@ -1,10 +1,16 @@
-<form class="toolbar container" action="" [formGroup]="newAccount" (ngSubmit)="onCreateAccount()">
+<div class="container">
+<form class="toolbar" action="" [formGroup]="newAccount" (ngSubmit)="onCreateAccount()">
 
   <input type="text" placeholder="id" hidden> 
   <input type="text" placeholder="Name" formControlName="name"> 
   <input type="text" placeholder="Initial sum" formControlName="sum"> 
   <input type="text" placeholder="Description" formControlName="description">
 
-  <button type="submit" class="filled">Create</button>
-  
+  <button 
+  [disabled]="newAccount.invalid" 
+  type="submit" class="filled">Create</button>
 </form>
+
+<p *ngIf="isInvalid('name')">Name is required</p>
+<p *ngIf="isInvalid('sum')">Initial sum must be a number</p>
+</div>

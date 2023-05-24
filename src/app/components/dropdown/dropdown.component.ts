@@ -18,15 +18,12 @@ export class DropdownComponent {
     if (event.target.checked) {
       this.selectedItems.push(event.target.value)
     } else {
-      // const i = this.selectedItems.findIndex(x => x.value === event.target.value)
       const i = this.selectedItems.indexOf(event.target.value, 0)
       if (i > -1) {
         this.selectedItems.splice(i, 1)
       }
     }
     this.sendArrayToParent.emit(this.selectedItems)
-
-    // console.log(this.selectedItems);
     
     // const selectedItems = []
     // if (event.target.checked) {
@@ -37,8 +34,4 @@ export class DropdownComponent {
     //   selectedItems.removeAt(index)
     // }
   }
-
-  // showList() {
-  //   // this.shown.emit(true)
-  // }
 }
