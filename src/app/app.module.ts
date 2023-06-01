@@ -41,6 +41,7 @@ import { CategoryCardComponent } from './pages/settings/categories/category-card
 import { CategoryCreateComponent } from './pages/settings/categories/category-create/category-create.component';
 import { CategoriesListComponent } from './pages/settings/categories/categories-list/categories-list.component';
 import { ProgressBarChartComponent } from './components/charts/progress-bar-chart/progress-bar-chart.component';
+import { BudgetTotalComponent } from './pages/budget/budget-total/budget-total.component';
 
 
 @NgModule({
@@ -72,6 +73,7 @@ import { ProgressBarChartComponent } from './components/charts/progress-bar-char
     CategoryCreateComponent,
     CategoriesListComponent,
     ProgressBarChartComponent,
+    BudgetTotalComponent,
   ],
   imports: [
     BrowserModule,

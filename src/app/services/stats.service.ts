@@ -20,7 +20,7 @@ export class StatsService {
     return stats
   }
 
-  getTypeStats(params: FormGroup) : ITypeStats {
+  public getTypeStats(params: FormGroup) : ITypeStats {
     var stats: ITypeStats = {}
     // this.setZeroTypeStats(stats)
     
@@ -48,7 +48,7 @@ export class StatsService {
     return stats
   } //getData()
 
-  getCategoryStats(params: FormGroup, type: string) : ICategoryStats {
+  public getCategoryStats(params: FormGroup, type: string) : ICategoryStats {
     var stats: ICategoryStats = {}
     this.dataService.getAll("transactions").subscribe((transactions: ITransaction[]) => {
       transactions.forEach(transaction => {
@@ -77,7 +77,7 @@ export class StatsService {
 
   } //getData()
 
-  getBudgetTotal(params: FormGroup) : number {
+  public getBudgetTotal(params: FormGroup) : number {
     var total = 0
     this.dataService.getAll("transaction_categories").subscribe((categories: ITransactionCategory[]) => {
       categories.forEach(category => {
