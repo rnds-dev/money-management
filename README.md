@@ -18,7 +18,7 @@ Web-приложение для учета личных финансов.
 1. **статья бюджета** (на каких категориях установлен лимит, какой результат, есть ли превышение)
 2. **график доходов или расходов по категориям**
 
-![dashboard](/previews/dashboard.png)
+![dashboard](/assets/previews/dashboard.png)
 
 ********
 
@@ -34,7 +34,7 @@ Web-приложение для учета личных финансов.
 
 На странице есть форма создания новой операции и список существующих операций (с возможностью фильтрации по типам/категориям/счетам)  
 
-![transactions](/previews/transactions.png)
+![transactions](/assets/previews/transactions.png)
 
 ********
 
@@ -45,14 +45,14 @@ Web-приложение для учета личных финансов.
 3. Описание
 Счета можно создавать / удалять / редактировать
 
-![accounts](/previews/accounts.png)
+![accounts](/assets/previews/accounts.png)
 
 ********
 
 #### Настройки (Accounts)
 Здесь можно управлять существующими категориями или добавлять новые.
 
-![settings](/previews/settings.png)
+![settings](/assets/previews/settings.png)
 
 
 ## Технологии
