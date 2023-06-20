@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ICategoryStats, ITransaction, ITransactionCategory, ITransactionType, ITypeStats } from '../models/transaction';
 import { DataService } from './data.service';
+import { IAccount } from '../models/account';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,21 @@ import { DataService } from './data.service';
 export class StatsService {
 
   // stats: any = {}
-  constructor(private dataService: DataService) { } 
+  constructor(private dataService: DataService) { }
 
-  private setZeroTypeStats(stats: ITypeStats) : ITypeStats {
+  public getTotal(): number {
+    let amount: number = 0
+    this.dataService.getAll("accounts").forEach((accounts: IAccount[]) => {
+      
+      accounts.forEach(account => {
+        amount += account.sum
+        console.log(amount);
+      })
+    })
+    return amount
+  }
+
+  private setZeroTypeStats(stats: ITypeStats): ITypeStats {
     this.dataService.getAll("transaction_types").subscribe((types: ITransactionType[]) => {
       types.forEach(type => {
         stats[type.name] = 0
@@ -20,15 +33,15 @@ export class StatsService {
     return stats
   }
 
-  public getTypeStats(params: FormGroup) : ITypeStats {
+  public getTypeStats(params: FormGroup): ITypeStats {
     var stats: ITypeStats = {}
     // this.setZeroTypeStats(stats)
-    
+
     this.dataService.getAll("transactions").subscribe((transactions: ITransaction[]) => {
       transactions.forEach(transaction => {
         if (transaction.date && (
-            transaction.date < params.value.startDate ||
-            transaction.date > params.value.endDate)) return
+          transaction.date < params.value.startDate ||
+          transaction.date > params.value.endDate)) return
 
         if (stats[transaction.type]) {
           stats[transaction.type] += transaction.sum
@@ -48,7 +61,7 @@ export class StatsService {
     return stats
   } //getData()
 
-  public getCategoryStats(params: FormGroup, type: string) : ICategoryStats {
+  public getCategoryStats(params: FormGroup, type: string): ICategoryStats {
     var stats: ICategoryStats = {}
     this.dataService.getAll("transactions").subscribe((transactions: ITransaction[]) => {
       transactions.forEach(transaction => {
@@ -77,11 +90,11 @@ export class StatsService {
 
   } //getData()
 
-  public getBudgetTotal(params: FormGroup) : number {
+  public getBudgetTotal(params: FormGroup): number {
     var total = 0
     this.dataService.getAll("transaction_categories").subscribe((categories: ITransactionCategory[]) => {
       categories.forEach(category => {
-        if (category.budget!=null) total+=category.budget
+        if (category.budget != null) total += category.budget
       })
     })
     return total

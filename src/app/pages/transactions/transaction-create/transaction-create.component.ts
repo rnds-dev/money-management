@@ -37,6 +37,8 @@ export class TransactionCreateComponent implements OnInit {
   }
 
   create() {
+    // , -> .
+
     if (this.newTransaction.value.type === "Expense")
       this.newTransaction.value.sum *= -1
 

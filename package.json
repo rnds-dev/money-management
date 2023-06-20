@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --output-path D:/apps/ospanel/domains/money-management-app",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

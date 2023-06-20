@@ -42,6 +42,7 @@ import { CategoryCreateComponent } from './pages/settings/categories/category-cr
 import { CategoriesListComponent } from './pages/settings/categories/categories-list/categories-list.component';
 import { ProgressBarChartComponent } from './components/charts/progress-bar-chart/progress-bar-chart.component';
 import { BudgetTotalComponent } from './pages/budget/budget-total/budget-total.component';
+import { TotalSumComponent } from './pages/home/total-sum/total-sum.component';
 
 
 @NgModule({
@@ -74,6 +75,7 @@ import { BudgetTotalComponent } from './pages/budget/budget-total/budget-total.c
     CategoriesListComponent,
     ProgressBarChartComponent,
     BudgetTotalComponent,
+    TotalSumComponent,
   ],
   imports: [
     BrowserModule,
