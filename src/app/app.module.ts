@@ -45,6 +45,7 @@ import { BudgetTotalComponent } from './pages/budget/budget-total/budget-total.c
 import { TotalSumComponent } from './pages/home/total-sum/total-sum.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

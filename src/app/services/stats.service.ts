@@ -15,10 +15,10 @@ export class StatsService {
   public getTotal(): number {
     let amount: number = 0
     this.dataService.getAll("accounts").forEach((accounts: IAccount[]) => {
-      
+
       accounts.forEach(account => {
         amount += account.sum
-        console.log(amount);
+        // console.log(amount);
       })
     })
     return amount
@@ -35,7 +35,6 @@ export class StatsService {
 
   public getTypeStats(params: FormGroup): ITypeStats {
     var stats: ITypeStats = {}
-    // this.setZeroTypeStats(stats)
 
     this.dataService.getAll("transactions").subscribe((transactions: ITransaction[]) => {
       transactions.forEach(transaction => {
@@ -48,10 +47,10 @@ export class StatsService {
         } else {
           stats[transaction.type] = transaction.sum
         }
-      } //forEach function
-      ) //forEach
-    } //subscribe function
-    ) //subscribe
+      }
+      )
+    }
+    )
 
     // const sorted = Object.keys(this.stats).sort().reduce((acc, key) => {
     //   acc[key] = this.stats[key]
@@ -59,7 +58,7 @@ export class StatsService {
     // })
     // console.log(sorted);
     return stats
-  } //getData()
+  }
 
   public getCategoryStats(params: FormGroup, type: string): ICategoryStats {
     var stats: ICategoryStats = {}
@@ -75,11 +74,11 @@ export class StatsService {
         } else {
           stats[transaction.category] = transaction.sum
         }
-
-      } //forEach function
-      ) //forEach
-    } //subscribe function
-    ) //subscribe
+        // console.log(stats)
+      }
+      )
+    }
+    )
 
     // const sorted = Object.keys(this.stats).sort().reduce((acc, key) => {
     //   acc[key] = this.stats[key]
@@ -87,16 +86,16 @@ export class StatsService {
     // })
     // console.log(sorted);
     return stats
-
-  } //getData()
+  }
 
   public getBudgetTotal(params: FormGroup): number {
     var total = 0
-    this.dataService.getAll("transaction_categories").subscribe((categories: ITransactionCategory[]) => {
-      categories.forEach(category => {
-        if (category.budget != null) total += category.budget
+    this.dataService.getAll("transaction_categories")
+      .subscribe((categories: ITransactionCategory[]) => {
+        categories.forEach(category => {
+          if (category.budget != null) total += category.budget
+        })
       })
-    })
     return total
   }
 }

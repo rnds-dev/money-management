@@ -2,6 +2,14 @@
 <form class="toolbar" action="" [formGroup]="newAccount" (ngSubmit)="onCreateAccount()">
 
   <input type="text" placeholder="id" hidden> 
+
+  <select
+    formControlName="type"
+    *ngIf="types$ | async as types"
+    >
+    <option *ngFor="let type of types" [value]="type.name">{{type.name}}</option>
+  </select>
+
   <input type="text" placeholder="Name" formControlName="name"> 
   <input type="text" placeholder="Initial sum" formControlName="sum"> 
   <input type="text" placeholder="Description" formControlName="description">

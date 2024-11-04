@@ -1,5 +1,22 @@
-<div class="row container" *ngIf="accounts$ | async as accounts">
-  <app-account-card class="col-4" *ngFor="let account of accounts" [account]="account"
-    (click)="modalService.open(account)">
-  </app-account-card>
+
+<p>{{errorMessage}}</p>
+<div class="container" *ngIf="accountTypes$ | async as types">
+
+  <ng-container *ngFor="let type of types">
+
+    <h3>{{type.name}}</h3>
+
+    <div class="row" *ngIf="accounts$ | async as accounts">
+      <ng-container *ngFor="let account of accounts">
+        <app-account-card
+          *ngIf="account.type===type.name"
+          class="col-4"  
+          [account]="account"
+          (click)="modalService.open(account)">
+        </app-account-card>
+      </ng-container>
+    </div>
+
+  </ng-container>
 </div>
+

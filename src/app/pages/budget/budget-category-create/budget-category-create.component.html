@@ -1,0 +1,13 @@
+<form class="toolbar container" action="" [formGroup]="newBudgetCategory" (ngSubmit)="create()">
+
+  <select formControlName="id" *ngIf="categories$ | async as categories">
+    <option [value]="null" disabled>Category</option>
+    <ng-container *ngFor="let category of categories">
+      <option *ngIf="category.type=='Expense'" [value]="category.id">{{category.name}}</option>
+    </ng-container>
+  </select>
+
+  <input type="text" name="" id="" placeholder="Sum" formControlName="budget">
+
+  <button type="submit" class="filled">Create</button>
+</form>

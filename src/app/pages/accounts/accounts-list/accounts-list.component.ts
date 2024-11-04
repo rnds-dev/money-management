@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { IAccount } from 'src/app/models/account';
+import { Observable, catchError } from 'rxjs';
+import { IAccount, IAccountType } from 'src/app/models/account';
 import { DataService } from 'src/app/services/data.service';
 import { ModalService } from 'src/app/services/modal.service';
 
@@ -10,6 +10,8 @@ import { ModalService } from 'src/app/services/modal.service';
 })
 export class AccountsListComponent {
   accounts$!: Observable<IAccount[]>
+  accountTypes$!: Observable<IAccountType[]>
+  errorMessage: string = "No errors"
 
   constructor(
     public modalService: ModalService,
@@ -18,5 +20,6 @@ export class AccountsListComponent {
 
   ngOnInit(): void {
     this.accounts$ = this.dataService.getAll("accounts")
+    this.accountTypes$ = this.dataService.getAll("account_types")
   }
 }

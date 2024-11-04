@@ -1,25 +1,91 @@
-<div class="wide-card">
-  <p>{{transaction.type}}</p>
-  <div class="date">
-    <h6 *ngIf="transaction.date">{{transaction.date}}</h6>
-  </div>
+<ng-container *ngIf="isExists">
+  <ng-container *ngTemplateOutlet="editMode ? edit : read"></ng-container>
+</ng-container>
 
-  <div class="info">
-    <h6>{{transactionCategory}}</h6>
-    <p class="description" *ngIf="transaction.description">{{transaction.description}}</p>
-  </div>
+<ng-template #read>
+  <div class="wide-card">
+    <div class="info">
+      <h6>{{transactionCategory}}</h6>
 
-  <div class="accounts">
-    <h6>{{transaction.account}}</h6>
-    <h6 *ngIf="transaction.to_account">{{transaction.to_account}}</h6>
-  </div>
+      <p class="description" *ngIf="transactionForm.get('description')?.value">
+        {{transactionForm.get('description')?.value}}</p>
 
-  <div class="sum">
-    <h6 [class.isGreen]="transaction.sum>=0">{{transaction.sum}}</h6>
-    <p class="description" *ngIf="transaction.fees">Fees: {{transaction.fees}}</p>
-  </div>
+      <small>{{transactionForm.get('account')?.value}}
+        <ng-container *ngIf="transactionForm.get('to_account')?.value">
+          → {{transactionForm.get('to_account')?.value}}
+        </ng-container>
+      </small>
+    </div>
 
-  <div class="actions">
-    <button (click)="delete()" class="outlined">Delete</button>
+    <div class="sum">
+      <h6 [class.isGreen]="transactionForm.get('sum')?.value>=0">{{transactionForm.get('sum')?.value}}</h6>
+      <p class="description" *ngIf="transactionForm.get('fees')?.value">Fees: {{transactionForm.get('fees')?.value}}</p>
+    </div>
+
+    <div class="actions">
+      <button (click)="openEditMode()" class="outlined">Edit</button>
+    </div>
   </div>
-</div>
+</ng-template>
+
+<ng-template #edit>
+  <form class="wide-card" [formGroup]="transactionForm">
+
+    <div class="info group">
+      <strong>Transaction</strong>
+
+      <select formControlName="type" *ngIf="transactionDataService.types | async as types">
+        <option [value]="null" disabled>Type</option>
+        <option *ngFor="let type of types" [value]="type.name" [selected]="type.name === transaction.type">{{type.name}}
+        </option>
+      </select>
+
+      <ng-container *ngIf="transactionForm.get('type')?.value !== 'Transfer' ">
+        <select formControlName="category" *ngIf="(transactionDataService.categories| async) as categories">
+          <option [value]="null" disabled>Category</option>
+          <ng-container *ngFor="let category of categories">
+            <option [value]="category.name" [selected]="category.name === transaction.category">{{category.name}}
+            </option>
+          </ng-container>
+        </select>
+      </ng-container>
+
+      <small>
+        <select formControlName="account" *ngIf="(transactionDataService.accounts| async) as accounts">
+          <option [value]="null" disabled>Account</option>
+          <option *ngFor="let account of accounts" [value]="account.name"
+            [selected]="account.name === transaction.account">{{account.name}}</option>
+        </select>
+
+        <ng-container *ngIf="transactionForm.get('type')?.value === 'Transfer'">
+          ->
+          <select formControlName="to_account" *ngIf="(transactionDataService.accounts | async) as accounts">
+            <option [value]="null" disabled>To account</option>
+            <option *ngFor="let account of accounts" [value]="account.name"
+              [selected]="account.name === transaction.to_account">{{account.name}}</option>
+          </select>
+        </ng-container>
+      </small>
+
+    </div>
+
+    <div class="sum group">
+      <strong>Sum</strong>
+
+      <input [class.isGreen]="transaction.sum>=0" formControlName="sum" placeholder="Sum">
+      <input type="text" formControlName="fees" placeholder="Fees">
+    </div>
+
+    <div class="group">
+      <strong>Description</strong>
+
+      <input type="date" formControlName="date">
+      <input type="text" formControlName="description" placeholder="Description">
+    </div>
+
+    <div class="actions">
+      <button type="submit" (click)="save()" class="outlined">✓</button>
+      <button type="button" (click)="delete()" class="outlined">X</button>
+    </div>
+  </form>
+</ng-template>

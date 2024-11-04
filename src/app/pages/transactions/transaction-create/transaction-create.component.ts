@@ -1,22 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { IAccount } from 'src/app/models/account';
-import { ITransactionCategory, ITransactionType } from 'src/app/models/transaction';
 import { DataService } from 'src/app/services/data.service';
 import { DateService } from 'src/app/services/date.service';
+import { TransactionDataService } from 'src/app/services/transaction-data.service';
 
 @Component({
   selector: 'app-transaction-create',
   templateUrl: './transaction-create.component.html',
 })
-export class TransactionCreateComponent implements OnInit {
-  accounts$!: Observable<IAccount[]>
-  types$!: Observable<ITransactionType[]>
-  categories$!: Observable<ITransactionCategory[]>
-
+export class TransactionCreateComponent {
   newTransaction: FormGroup = new FormGroup({
-    // [Validators.required]
     type: new FormControl(),
     category: new FormControl(),
     account: new FormControl(),
@@ -28,17 +21,12 @@ export class TransactionCreateComponent implements OnInit {
     description: new FormControl()
   })
 
-  constructor(private dataService: DataService, private dateService: DateService) { }
-
-  ngOnInit(): void {
-    this.accounts$ = this.dataService.getAll("accounts")
-    this.types$ = this.dataService.getAll("transaction_types")
-    this.categories$ = this.dataService.getAll("transaction_categories")
-  }
+  constructor(
+    private dataService: DataService,
+    private dateService: DateService,
+    public transactionDataService: TransactionDataService) { }
 
   create() {
-    // , -> .
-
     if (this.newTransaction.value.type === "Expense")
       this.newTransaction.value.sum *= -1
 

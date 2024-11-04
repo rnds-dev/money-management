@@ -1,0 +1,92 @@
+<p> < Apr 2023 > </p>
+<p>Stats: income / expense / total</p>
+<p>Budget with settings</p>
+
+
+
+        
+
+<div class="container">
+  <form class="toolbar" action="" [formGroup]="filteredTransactions" (ngSubmit)="getData()">
+
+    <div class="dates">
+      <input formControlName="start_date" type="date" placeholder="start_date">
+
+
+      <input formControlName="end_date" type="date" placeholder="end_date">
+    </div>
+
+
+    <select formControlName="type" *ngIf="types$ | async as types">
+      <ng-container *ngFor="let type of types">
+        <option *ngIf="type.name!='Transfer'" [value]="type.name">{{type.name}}</option>
+      </ng-container>
+    </select>
+    <!-- 
+    <ng-container *ngIf="filteredTransactions.value.type!=='Transfer'">
+    <label for="">Category</label>
+    <select
+      formControlName="category"
+      *ngIf="categories$ | async as categories">
+      <ng-container *ngFor="let category of categories">
+          <option *ngIf="category.type === filteredTransactions.value.type" [value]="category.name">{{category.name}}</option>
+      </ng-container>
+    </select>
+  </ng-container>
+
+    <label for="">Account</label>
+    <select
+    formControlName="account"
+    *ngIf="accounts$ | async as accounts">
+      <option *ngFor="let account of accounts" [value]="account.id">{{account.name}}</option>
+    </select>
+
+
+    <label for="">Sum</label>
+    <input formControlName="from_sum" type="text" placeholder="From">
+    <input formControlName="to_sum" type="text" placeholder="To">  -->
+
+    <button class="filled">Get data</button>
+  </form>
+</div>
+
+
+
+<app-title-page [title]="title"></app-title-page>
+<app-bar-chart [dataIn]="this.stats"></app-bar-chart>
+<app-categories-list></app-categories-list>
+<app-category-create></app-category-create>
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+  accounts$!: Observable<IAccount[]>
+  types$!: Observable<ITransactionType[]>
+  // categories$!: Observable<ITransactionCategory[]>
+
+  start_date: Date = new Date(this.date.getFullYear(), this.date.getMonth(), 2)
+  end_date: Date = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1)
+
+  filteredTransactions: FormGroup = new FormGroup({
+
+    start_date: new FormControl(this.start_date.toISOString().split('T')[0]),
+    end_date: new FormControl(this.end_date.toISOString().split('T')[0]),
+    type: new FormControl("Expense"),
+
+    // category: new FormControl(),
+    // account: new FormControl(),
+
+    // from_sum: new FormControl(),
+    // to_sum: new FormControl(),
+  })
+
+

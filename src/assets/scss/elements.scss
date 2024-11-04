@@ -19,8 +19,14 @@ $radius: 0.8rem;
 
 p, span {
   font-size: 1.4rem;
-  // line-height: 1.5;
   font-weight: 500;
+}
+strong {
+  font-size: 1.4rem;
+}
+small {
+  font-size: 1rem;
+  color: lightgray;
 }
 
 
@@ -85,9 +91,10 @@ input {
 select {
   border: none;
   background: $surface;
-
+  font-family: 'Open Sans';
   option {
     background: $surface;
+    font-family: 'Open Sans';
   }
 }
 

@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ITransaction } from 'src/app/models/transaction';
+import { IAccount } from 'src/app/models/account';
+import { ITransaction, ITransactionCategory, ITransactionType } from 'src/app/models/transaction';
 import { DataService } from 'src/app/services/data.service';
+import { DateService } from 'src/app/services/date.service';
 
 @Component({
   selector: 'app-transactions-list',
   templateUrl: './transactions-list.component.html',
 })
 export class TransactionsListComponent  implements OnInit {
-
+  groupedTransactions: TransactionsByDate[] = []
   transactionCategories: Array<any> = []
   selectedCategories: Array<string> = []
   transactionCategoriesTitle: string = "Category"
@@ -23,7 +25,11 @@ export class TransactionsListComponent  implements OnInit {
 
   transactions$!: Observable<ITransaction[]>
 
-  constructor(private dataService: DataService) { }
+  accounts$!: Observable<IAccount[]>
+  types$!: Observable<ITransactionType[]>
+  categories$!: Observable<ITransactionCategory[]>
+
+  constructor(private dataService: DataService, private dateService: DateService) { }
   
   ngOnInit(): void {
     this.dataService.getAll("transaction_types").subscribe((types) => {
@@ -32,11 +38,29 @@ export class TransactionsListComponent  implements OnInit {
     this.dataService.getAll("transaction_categories").subscribe((categories) => {
       this.transactionCategories = categories
     })
-        this.dataService.getAll("accounts").subscribe((accounts) => {
+    this.dataService.getAll("accounts").subscribe((accounts) => {
       this.transactionAccounts = accounts
     })
 
     this.transactions$ = this.dataService.getAll("transactions")
+    this.accounts$ = this.dataService.getAll("accounts")
+    this.types$ = this.dataService.getAll("transaction_types")
+    this.categories$ = this.dataService.getAll("transaction_categories")
+
+    this.transactions$.subscribe((transactions: ITransaction[]) => {
+      const obj = transactions.reduce((data: any, current) => {
+        let key = this.dateService.convertDateFormat(current.date!)
+        if (!data[key]) {
+          data[key] = []
+        }
+        data[key].push(current)
+        return data
+      }, {})
+      this.groupedTransactions = Object.keys(obj).map(key => ({
+        date: key,
+        transactions: obj[key]
+      }))
+    }) 
   }
 
   getSelectedTypes(array: any[]) {
@@ -55,4 +79,9 @@ export class TransactionsListComponent  implements OnInit {
     if (this.selectedAccounts.length != 0)    if(!this.selectedAccounts.includes(transaction.account))    return false
     return true
   }
+}
+
+export interface TransactionsByDate {
+  date: string,
+  transactions: any,
 }

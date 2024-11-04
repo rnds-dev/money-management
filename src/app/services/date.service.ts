@@ -4,9 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DateService {
-  private date: Date = new Date()
-   
-  constructor() { }
+  public date: Date = new Date()
 
   public dateToString(date: Date) : string {
     return date.toISOString().split('T')[0]
@@ -28,4 +26,8 @@ export class DateService {
     return this.dateToString(new Date(this.date.getFullYear(), this.date.getMonth() + 1, 1))
   }
 
+  public convertDateFormat(dateInput: Date): string {
+    const tempDate: Date = new Date(dateInput.toString())
+    return tempDate.toLocaleDateString()
+  }
 }
