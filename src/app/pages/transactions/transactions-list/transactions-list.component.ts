@@ -4,12 +4,13 @@ import { IAccount } from 'src/app/models/account';
 import { ITransaction, ITransactionCategory, ITransactionType } from 'src/app/models/transaction';
 import { DataService } from 'src/app/services/data.service';
 import { DateService } from 'src/app/services/date.service';
+import { TransactionDataService } from 'src/app/services/transaction-data.service';
 
 @Component({
   selector: 'app-transactions-list',
   templateUrl: './transactions-list.component.html',
 })
-export class TransactionsListComponent  implements OnInit {
+export class TransactionsListComponent implements OnInit {
   groupedTransactions: TransactionsByDate[] = []
   transactionCategories: Array<any> = []
   selectedCategories: Array<string> = []
@@ -18,34 +19,26 @@ export class TransactionsListComponent  implements OnInit {
   transactionAccounts: Array<any> = []
   selectedAccounts: Array<string> = []
   transactionAccountsTitle: string = "Accounts"
-  
+
   transactionTypes: Array<any> = []
   selectedTypes: Array<string> = []
   transactionTypesTitle: string = "Type"
 
   transactions$!: Observable<ITransaction[]>
 
-  accounts$!: Observable<IAccount[]>
-  types$!: Observable<ITransactionType[]>
-  categories$!: Observable<ITransactionCategory[]>
+  constructor(
+    private dataService: DataService,
+    private dateService: DateService,
+    private transactionDataService: TransactionDataService) { }
 
-  constructor(private dataService: DataService, private dateService: DateService) { }
-  
   ngOnInit(): void {
-    this.dataService.getAll("transaction_types").subscribe((types) => {
-      this.transactionTypes = types
-    })
-    this.dataService.getAll("transaction_categories").subscribe((categories) => {
-      this.transactionCategories = categories
-    })
-    this.dataService.getAll("accounts").subscribe((accounts) => {
-      this.transactionAccounts = accounts
-    })
-
     this.transactions$ = this.dataService.getAll("transactions")
-    this.accounts$ = this.dataService.getAll("accounts")
-    this.types$ = this.dataService.getAll("transaction_types")
-    this.categories$ = this.dataService.getAll("transaction_categories")
+    this.transactionDataService.accounts
+      .subscribe(accounts => this.transactionAccounts = accounts)
+    this.transactionDataService.types
+      .subscribe(types => this.transactionTypes = types)
+    this.transactionDataService.categories
+      .subscribe(categories => this.transactionCategories = categories)
 
     this.transactions$.subscribe((transactions: ITransaction[]) => {
       const obj = transactions.reduce((data: any, current) => {
@@ -60,7 +53,7 @@ export class TransactionsListComponent  implements OnInit {
         date: key,
         transactions: obj[key]
       }))
-    }) 
+    })
   }
 
   getSelectedTypes(array: any[]) {
@@ -74,10 +67,13 @@ export class TransactionsListComponent  implements OnInit {
   }
 
   checkTransaction(transaction: ITransaction): boolean {
-    if (this.selectedTypes.length != 0)       if(!this.selectedTypes.includes(transaction.type))          return false
-    if (this.selectedCategories.length != 0)  if(!this.selectedCategories.includes(transaction.category)) return false
-    if (this.selectedAccounts.length != 0)    if(!this.selectedAccounts.includes(transaction.account))    return false
-    return true
+    return this.checkFilter(transaction.type, this.selectedTypes) &&
+      this.checkFilter(transaction.category, this.selectedCategories) &&
+      this.checkFilter(transaction.account, this.selectedAccounts)
+  }
+
+  private checkFilter(value: any, filters: Array<any>): boolean {
+    return filters.length === 0 || filters.includes(value)
   }
 }
 
