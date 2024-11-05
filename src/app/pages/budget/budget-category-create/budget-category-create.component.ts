@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ITransactionCategory } from 'src/app/models/transaction';
 import { DataService } from 'src/app/services/data.service';
+import { TransactionDataService } from 'src/app/services/transaction-data.service';
 
 @Component({
   selector: 'app-budget-category-create',
@@ -16,13 +17,16 @@ export class BudgetCategoryCreateComponent implements OnInit {
     budget: new FormControl(),
   })
 
-  constructor(private dataService: DataService) { }
+  constructor(
+    private transactionDataService: TransactionDataService,
+    private dataService: DataService
+  ) { }
 
   ngOnInit(): void {
-    this.categories$ = this.dataService.getAll("transaction_categories")
+    this.categories$ = this.transactionDataService.categories
   }
 
-  create(){
-    this.dataService.update("transaction_categories", this.newBudgetCategory.value.id, {...this.newBudgetCategory.value})
+  create() {
+    this.dataService.update("transaction_categories", this.newBudgetCategory.value.id, { ...this.newBudgetCategory.value })
   }
 }

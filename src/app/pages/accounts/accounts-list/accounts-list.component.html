@@ -1,13 +1,12 @@
 
-<p>{{errorMessage}}</p>
 <div class="container" *ngIf="accountTypes$ | async as types">
 
   <ng-container *ngFor="let type of types">
 
     <h3>{{type.name}}</h3>
 
-    <div class="row" *ngIf="accounts$ | async as accounts">
-      <ng-container *ngFor="let account of accounts">
+    <div class="row">
+      <ng-container *ngFor="let account of transactionDataService.getAccounts">
         <app-account-card
           *ngIf="account.type===type.name"
           class="col-4"  

@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ICategoryStats, ITransactionType } from 'src/app/models/transaction';
-import { DataService } from 'src/app/services/data.service';
 import { StatsService } from 'src/app/services/stats.service';
+import { TransactionDataService } from 'src/app/services/transaction-data.service';
 
 @Component({
   selector: 'app-chart-stats',
@@ -19,16 +19,13 @@ export class ChartStatsComponent {
 
   selectedType: string = 'Expense'
   stats: ICategoryStats = {}
-  transactionTypes$!: Observable<ITransactionType[]>
 
   constructor(private statsService: StatsService,
-    private dataService: DataService) {}
+    public transactionDataService: TransactionDataService) {}
 
   ngOnInit(): void {
-    this.transactionTypes$ = this.dataService.getAll("transaction_types")
-    
     this.getStats()
-    this.selectedPeriod.valueChanges.subscribe(changes => {
+    this.selectedPeriod.valueChanges.subscribe(() => {
       this.getStats()
     })
   }

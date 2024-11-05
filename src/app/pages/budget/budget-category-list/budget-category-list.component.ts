@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ICategoryStats, ITransactionCategory } from 'src/app/models/transaction';
-import { DataService } from 'src/app/services/data.service';
 import { StatsService } from 'src/app/services/stats.service';
+import { TransactionDataService } from 'src/app/services/transaction-data.service';
 
 @Component({
   selector: 'app-budget-category-list',
@@ -14,17 +14,14 @@ export class BudgetCategoryListComponent {
     startDate: new FormControl(),
     endDate: new FormControl(),
   })
-  categories$!: Observable<ITransactionCategory[]>
   stats: ICategoryStats = {}
 
-  constructor(private dataService: DataService,
+  constructor(public transactionDataService: TransactionDataService,
     private statsService: StatsService) { }
 
   ngOnInit(): void {
-    this.categories$ = this.dataService.getAll("transaction_categories")
-
     this.getStats()
-    this.selectedPeriod.valueChanges.subscribe(changes => {
+    this.selectedPeriod.valueChanges.subscribe(() => {
       this.getStats()
     })
   }

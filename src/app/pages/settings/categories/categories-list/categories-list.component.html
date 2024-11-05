@@ -1,7 +1,7 @@
 <div class="container">
   <h6>List</h6>
 
-  <div class="" *ngIf="categories$ | async as categories">
-    <app-category-card *ngFor="let category of categories" [category]="category"></app-category-card>
+  <div>
+    <app-category-card *ngFor="let category of transactionDataService.getCategories" [category]="category"></app-category-card>
   </div>
 </div>

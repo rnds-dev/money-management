@@ -34,16 +34,17 @@
     <div class="info group">
       <strong>Transaction</strong>
 
-      <select formControlName="type" *ngIf="transactionDataService.types | async as types">
+      <select formControlName="type">
         <option [value]="null" disabled>Type</option>
-        <option *ngFor="let type of types" [value]="type.name" [selected]="type.name === transaction.type">{{type.name}}
+        <option *ngFor="let type of transactionDataService.getTypes" [value]="type.name" [selected]="type.name === transaction.type">{{type.name}}
         </option>
       </select>
 
       <ng-container *ngIf="transactionForm.get('type')?.value !== 'Transfer' ">
-        <select formControlName="category" *ngIf="(transactionDataService.categories| async) as categories">
+        <select formControlName="category" >
+          <!-- *ngIf="(transactionDataService.categories | async) as categories" -->
           <option [value]="null" disabled>Category</option>
-          <ng-container *ngFor="let category of categories">
+          <ng-container *ngFor="let category of transactionDataService.getCategories">
             <option [value]="category.name" [selected]="category.name === transaction.category">{{category.name}}
             </option>
           </ng-container>
@@ -51,17 +52,17 @@
       </ng-container>
 
       <small>
-        <select formControlName="account" *ngIf="(transactionDataService.accounts| async) as accounts">
+        <select formControlName="account">
           <option [value]="null" disabled>Account</option>
-          <option *ngFor="let account of accounts" [value]="account.name"
+          <option *ngFor="let account of transactionDataService.getAccounts" [value]="account.name"
             [selected]="account.name === transaction.account">{{account.name}}</option>
         </select>
 
         <ng-container *ngIf="transactionForm.get('type')?.value === 'Transfer'">
           ->
-          <select formControlName="to_account" *ngIf="(transactionDataService.accounts | async) as accounts">
+          <select formControlName="to_account">
             <option [value]="null" disabled>To account</option>
-            <option *ngFor="let account of accounts" [value]="account.name"
+            <option *ngFor="let account of transactionDataService.getAccounts" [value]="account.name"
               [selected]="account.name === transaction.to_account">{{account.name}}</option>
           </select>
         </ng-container>

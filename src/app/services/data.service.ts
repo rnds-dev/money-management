@@ -8,11 +8,11 @@ export class DataService {
 
   private url = 'https://money-management-server/'
 
-  constructor(
-    private http: HttpClient) {
-    }
+  constructor(private http: HttpClient) { }
 
-  public getAll(link: string) {    
+  public getAll(link: string) {
+    console.trace(link);
+    
     return this.http.get<any>(this.url + link)
   }
 
@@ -22,19 +22,19 @@ export class DataService {
 
   public add(link: string, body: any) {
     return this.http.post(this.url + link, body).subscribe(body => {
-      console.log('Ответ сервера: ', body);
+      console.log('Response: ', body);
     })
   }
 
   public delete(link: string, id: number) {
     return this.http.delete(this.url + link + "/" + id).subscribe(body => {
-      console.log('Ответ сервера: ', body);
+      console.log('Response: ', body);
     })
   }
 
   public update(link: string, id: number, body: any) {
     this.http.patch(this.url + link + "/" + id, body).subscribe(body => {
-      console.log('Ответ сервера: ', body);
+      console.log('Response: ', body);
     })
   }
 }

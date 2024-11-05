@@ -13,7 +13,6 @@ export class BudgetComponent implements OnInit {
 
   @Input() selectedPeriod: FormGroup = new FormGroup({})
 
-
   constructor(private statsService: StatsService) {}
 
   ngOnInit(): void {
@@ -21,7 +20,6 @@ export class BudgetComponent implements OnInit {
   }
 
   getTotal() {
-    // this.total = 0    
     this.total = this.statsService.getBudgetTotal(this.selectedPeriod)
     return 0
   }

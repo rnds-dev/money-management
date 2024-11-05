@@ -1,8 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { IAccount } from 'src/app/models/account';
-import { ITransaction, ITransactionCategory, ITransactionType } from 'src/app/models/transaction';
+import { ITransaction } from 'src/app/models/transaction';
 import { DataService } from 'src/app/services/data.service';
 import { DateService } from 'src/app/services/date.service';
 import { TransactionDataService } from 'src/app/services/transaction-data.service';
@@ -11,7 +9,7 @@ import { TransactionDataService } from 'src/app/services/transaction-data.servic
   selector: 'app-transaction-card',
   templateUrl: './transaction-card.component.html',
 })
-export class TransactionCardComponent {
+export class TransactionCardComponent implements OnInit {
   @Input() transaction!: ITransaction
 
   public editMode: boolean = false

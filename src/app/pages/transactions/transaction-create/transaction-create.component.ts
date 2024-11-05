@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { DateService } from 'src/app/services/date.service';
 import { TransactionDataService } from 'src/app/services/transaction-data.service';
@@ -33,6 +33,6 @@ export class TransactionCreateComponent {
     if (this.newTransaction.value.type !== "Transfer")
       this.newTransaction.value.to_account = null
 
-    this.dataService.add("transactions", { ...this.newTransaction.value })       
+    this.dataService.add("transactions", { ...this.newTransaction.value })
   }
 }

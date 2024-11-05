@@ -1,28 +1,28 @@
 <form class="toolbar container" action="" [formGroup]="newTransaction" (ngSubmit)="create()">
 
-  <select formControlName="type" *ngIf="transactionDataService.types | async as types">
+  <select formControlName="type">
     <option [value]="null" disabled>Type</option>
-    <option *ngFor="let type of types" [value]="type.name">{{type.name}}</option>
+    <option *ngFor="let type of transactionDataService.getTypes" [value]="type.name">{{type.name}}</option>
   </select>
 
   <ng-container *ngIf=" newTransaction.value.type !== 'Transfer' ">
-    <select formControlName="category" *ngIf="(transactionDataService.categories | async) as categories">
+    <select formControlName="category">
       <option [value]="null" disabled>Category</option>
-      <ng-container *ngFor="let category of categories">
+      <ng-container *ngFor="let category of transactionDataService.getCategories">
         <option *ngIf="category.type === newTransaction.value.type" [value]="category.name">{{category.name}}</option>
       </ng-container>
     </select>
   </ng-container>
 
-  <select formControlName="account" *ngIf="(transactionDataService.accounts | async) as accounts">
+  <select formControlName="account">
     <option [value]="null" disabled>Account</option>
-    <option *ngFor="let account of accounts" [value]="account.name">{{account.name}}</option>
+    <option *ngFor="let account of transactionDataService.getAccounts" [value]="account.name">{{account.name}}</option>
   </select>
 
   <ng-container *ngIf=" newTransaction.value.type === 'Transfer' ">
-    <select formControlName="to_account" *ngIf="(transactionDataService.accounts | async) as to_accounts">
+    <select formControlName="to_account">
       <option [value]="null" disabled>To account</option>
-      <ng-container *ngFor="let to_account of to_accounts">
+      <ng-container *ngFor="let to_account of transactionDataService.getAccounts">
         <option *ngIf="to_account.name !== newTransaction.value.account" [value]="to_account.name">{{to_account.name}}
         </option>
       </ng-container>

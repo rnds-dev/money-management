@@ -1,7 +1,7 @@
 <div class="container">
   <h6>Select type</h6>
-  <select name="" id="" [(ngModel)]="selectedType" *ngIf="transactionTypes$ | async as types" (ngModelChange)="getStats()">
-    <ng-container *ngFor="let type of types">
+  <select name="" id="" [(ngModel)]="selectedType" (ngModelChange)="getStats()">
+    <ng-container *ngFor="let type of transactionDataService.getTypes">
       <option *ngIf="type.name!=='Transfer'"  [value]="type.name">{{type.name}}</option>
     </ng-container>
   </select>

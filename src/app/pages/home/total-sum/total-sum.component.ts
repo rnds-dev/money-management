@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IAccount } from 'src/app/models/account';
-import { DataService } from 'src/app/services/data.service';
-import { StatsService } from 'src/app/services/stats.service';
+import { TransactionDataService } from 'src/app/services/transaction-data.service';
 
 @Component({
   selector: 'app-total-sum',
@@ -13,17 +11,11 @@ export class TotalSumComponent implements OnInit {
   public amountChange: number = 5000
   public percentageChange: number = 5
 
-  constructor(private statsService: StatsService, private dataService: DataService) {}
+  constructor(private transactionDataService: TransactionDataService) { }
 
   ngOnInit(): void {
-    this.dataService.getAll("accounts").forEach((accounts: IAccount[]) => {
-      
-      accounts.forEach(account => {
-        this.amount += account.sum
-      })
+    this.transactionDataService.getAccounts.forEach(account => {
+      this.amount += account.sum
     })
-    
   }
-
-
 }

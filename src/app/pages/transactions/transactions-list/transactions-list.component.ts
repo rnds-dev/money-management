@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IAccount } from 'src/app/models/account';
-import { ITransaction, ITransactionCategory, ITransactionType } from 'src/app/models/transaction';
+import { ITransaction } from 'src/app/models/transaction';
 import { DataService } from 'src/app/services/data.service';
 import { DateService } from 'src/app/services/date.service';
 import { TransactionDataService } from 'src/app/services/transaction-data.service';
@@ -33,12 +32,9 @@ export class TransactionsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.transactions$ = this.dataService.getAll("transactions")
-    this.transactionDataService.accounts
-      .subscribe(accounts => this.transactionAccounts = accounts)
-    this.transactionDataService.types
-      .subscribe(types => this.transactionTypes = types)
-    this.transactionDataService.categories
-      .subscribe(categories => this.transactionCategories = categories)
+    this.transactionCategories = this.transactionDataService.getCategories
+    this.transactionTypes = this.transactionDataService.getTypes
+    this.transactionAccounts = this.transactionDataService.getAccounts
 
     this.transactions$.subscribe((transactions: ITransaction[]) => {
       const obj = transactions.reduce((data: any, current) => {

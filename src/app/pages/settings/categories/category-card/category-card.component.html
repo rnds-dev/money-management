@@ -11,8 +11,8 @@
 <form class="article" [formGroup]="this.formCategory" (ngSubmit)="updateCategory()">
   <select
     formControlName="type"
-    *ngIf="types$ | async as types">
-    <option *ngFor="let type of types" [value]="type.name">{{type.name}}</option>
+    >
+    <option *ngFor="let type of transactionDataService.getTypes" [value]="type.name">{{type.name}}</option>
   </select>
   <input formControlName="name" type="text" placeholder="Name">
   <input formControlName="budget" type="text" placeholder="Budget">

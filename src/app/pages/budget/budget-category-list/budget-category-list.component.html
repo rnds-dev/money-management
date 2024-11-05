@@ -1,5 +1,5 @@
-<div class="container" *ngIf="categories$ | async as categories">
-  <ng-container *ngFor="let category of categories">
+<div class="container">
+  <ng-container *ngFor="let category of transactionDataService.getCategories">
     <app-budget-category-card 
       [category]="category"
       [status]="stats[category.name] ? stats[category.name] : 0"
