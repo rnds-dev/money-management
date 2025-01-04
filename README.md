@@ -42,7 +42,7 @@ Accounts can be created / deleted / edited
 ![accounts](/assets/previews/accounts.png)
 
 
-### Settings (Accounts)
+### Settings (Categories)
 Here you can manage existing categories or add new ones.
 
 ![settings](/assets/previews/settings.png)
@@ -68,11 +68,11 @@ git clone https://github.com/rnds-dev/money-management.git
 ```
 npm install -g @angular/cli
 ```
-3. Start project in terminal
+5. Start project in terminal
 `````
 ng serve
 `````
-3. Follow the link [http://localhost:4200/](http://localhost:4200/)
+6. Follow the link [http://localhost:4200/](http://localhost:4200/)
 
 
 ## Stack
