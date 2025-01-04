@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "money-management:build:production"
+              "buildTarget": "money-management:build:production"
             },
             "development": {
-              "browserTarget": "money-management:build:development"
+              "buildTarget": "money-management:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "money-management:build"
+            "buildTarget": "money-management:build"
           }
         },
         "test": {
