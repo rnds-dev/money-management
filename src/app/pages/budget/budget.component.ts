@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { map } from 'rxjs';
 import { StatsService } from 'src/app/services/stats.service';
 
 @Component({
@@ -7,20 +8,9 @@ import { StatsService } from 'src/app/services/stats.service';
   templateUrl: './budget.component.html',
   styleUrls: ['./budget.component.scss']
 })
-export class BudgetComponent implements OnInit {
+export class BudgetComponent {
   title = 'Budget'
   total = 0
 
   @Input() selectedPeriod: FormGroup = new FormGroup({})
-
-  constructor(private statsService: StatsService) {}
-
-  ngOnInit(): void {
-    this.getTotal()
-  }
-
-  getTotal() {
-    this.total = this.statsService.getBudgetTotal(this.selectedPeriod)
-    return 0
-  }
 }

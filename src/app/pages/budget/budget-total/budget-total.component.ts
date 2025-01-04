@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { map } from 'rxjs';
 import { StatsService } from 'src/app/services/stats.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class BudgetTotalComponent implements OnInit {
   constructor(private statsService: StatsService) {}
 
   ngOnInit(): void {
-    this.total = this.statsService.getBudgetTotal(this.selectedPeriod)
+    this.statsService.getBudgetTotal(this.selectedPeriod)
+      .pipe(map(res => this.total = res))
   }
 }
