@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { ICategoryStats, ITransaction, ITypeStats } from '../models/transaction';
 import { DataService } from './data.service';
 import { TransactionDataService } from './transaction-data.service';
+import { combineLatest, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,44 +14,44 @@ export class StatsService {
     private dataService: DataService
   ) { }
 
-  public getTotal(): number {
-    let amount: number = 0
-    this.transactionDataService.getAccountsObservable().subscribe(accounts =>
-      accounts.reduce((sum, account) => account.sum + sum, 0)
-    )
-    return amount
-  }
-
-  private setZeroTypeStats(stats: ITypeStats): ITypeStats {
-    this.transactionDataService.getTypesObservable().subscribe(types => {
-      types.forEach(type => {
-        stats[type.name] = 0
-      })
-    })
-    return stats
-  }
-
-  public getTypeStats(params: FormGroup): ITypeStats {
-    var stats: ITypeStats = {}
-
-    stats = this.setZeroTypeStats(stats)
-
-    this.dataService.getAll("transactions").subscribe((transactions: ITransaction[]) => {
-      transactions.forEach(transaction => {
-        if (transaction.date &&
-          (transaction.date < params.value.startDate ||
-            transaction.date > params.value.endDate)) return
-
-        if (stats[transaction.type]) {
-          stats[transaction.type] += transaction.sum
-        } else {
-          stats[transaction.type] = transaction.sum
-        }
-      }
+  public getTotal(): Observable<number> {
+    return this.transactionDataService.getAccountsObservable().pipe(
+      map(accounts =>
+          accounts.reduce((sum, account) => account.sum + sum, 0)
       )
-    }
     )
-    return stats
+  }
+  private initializeTypeStats(): Observable<ITypeStats> {
+    return this.transactionDataService.getTypesObservable().pipe(
+      map((types) => {
+        const stats: ITypeStats = {};
+        types.forEach((type) => (stats[type.name] = 0));
+        return stats;
+      })
+    );
+  }
+
+  public getTypeStats(params: FormGroup): Observable<ITypeStats> {
+    return combineLatest([
+      this.initializeTypeStats(),
+      this.dataService.getAll('transactions'),
+    ]).pipe(
+      map(([stats, transactions]) => {
+        transactions.forEach((transaction: ITransaction) => {
+          if (
+            transaction.date &&
+            (transaction.date < params.value.startDate ||
+              transaction.date > params.value.endDate)
+          ) {
+            return;
+          }
+
+          stats[transaction.type] =
+            (stats[transaction.type] || 0) + transaction.sum;
+        });
+        return stats;
+      })
+    );
   }
 
   public getCategoryStats(params: FormGroup, type: string): ICategoryStats {
@@ -74,12 +75,9 @@ export class StatsService {
     return stats
   }
 
-  public getBudgetTotal(params: FormGroup): number {
-    var total = 0
-    this.transactionDataService.getCategories
-      .forEach(category => {
-        if (category.budget != null) total += category.budget
-      })
-    return total
+  public getBudgetTotal(params: FormGroup): Observable<number> {
+    return this.transactionDataService.getCategoriesObservable().pipe(
+      map(categories => categories.reduce((total, category) => total + (category.budget || 0), 0))
+    )
   }
 }

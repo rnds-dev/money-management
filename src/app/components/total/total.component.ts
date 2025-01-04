@@ -12,16 +12,17 @@ export class TotalComponent implements OnInit {
 
   stats: ITypeStats = {}
 
-  constructor(private statsService: StatsService) {}
+  constructor(private statsService: StatsService) { }
 
   ngOnInit(): void {
     this.getStats()
-    this.selectedPeriod.valueChanges.subscribe(changes => {
+
+    this.selectedPeriod.valueChanges.subscribe(() => {
       this.getStats()
     })
   }
 
-  getStats(){
-    this.stats = this.statsService.getTypeStats(this.selectedPeriod) 
+  getStats() {
+    this.statsService.getTypeStats(this.selectedPeriod).subscribe(res => this.stats = res)
   }
 }

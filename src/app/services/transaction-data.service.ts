@@ -61,6 +61,15 @@ export class TransactionDataService {
     return this.typesRequest$
   }
 
+  public getCategoriesObservable() {
+    if (!this.categoriesRequest$) {
+      this.categoriesRequest$ = this.dataService.getAll("transaction_categories").pipe(
+        shareReplay({ bufferSize: 1, refCount: true })
+      )
+    }
+    return this.categoriesRequest$
+  }
+
   public get getCategories() {
     if (!this.categoriesRequest$) {
       this.categoriesRequest$ = this.dataService.getAll("transaction_categories").pipe(
@@ -72,6 +81,8 @@ export class TransactionDataService {
     }
     return this.categories
   }
+
+
 
   private getData(url: string, request$: Observable<any[]>, dataResponse: Array<any>) {
     if (!request$) {
