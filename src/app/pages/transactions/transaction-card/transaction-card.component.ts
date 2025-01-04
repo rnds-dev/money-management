@@ -6,8 +6,9 @@ import { DateService } from 'src/app/services/date.service';
 import { TransactionDataService } from 'src/app/services/transaction-data.service';
 
 @Component({
-  selector: 'app-transaction-card',
-  templateUrl: './transaction-card.component.html',
+    selector: 'app-transaction-card',
+    templateUrl: './transaction-card.component.html',
+    standalone: false
 })
 export class TransactionCardComponent implements OnInit {
   @Input() transaction!: ITransaction

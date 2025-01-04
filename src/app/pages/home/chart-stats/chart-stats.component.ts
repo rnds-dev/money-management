@@ -6,9 +6,10 @@ import { StatsService } from 'src/app/services/stats.service';
 import { TransactionDataService } from 'src/app/services/transaction-data.service';
 
 @Component({
-  selector: 'app-chart-stats',
-  templateUrl: './chart-stats.component.html',
-  styleUrls: ['./chart-stats.component.scss']
+    selector: 'app-chart-stats',
+    templateUrl: './chart-stats.component.html',
+    styleUrls: ['./chart-stats.component.scss'],
+    standalone: false
 })
 export class ChartStatsComponent {
 

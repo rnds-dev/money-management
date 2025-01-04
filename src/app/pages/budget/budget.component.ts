@@ -4,9 +4,10 @@ import { map } from 'rxjs';
 import { StatsService } from 'src/app/services/stats.service';
 
 @Component({
-  selector: 'app-budget',
-  templateUrl: './budget.component.html',
-  styleUrls: ['./budget.component.scss']
+    selector: 'app-budget',
+    templateUrl: './budget.component.html',
+    styleUrls: ['./budget.component.scss'],
+    standalone: false
 })
 export class BudgetComponent {
   title = 'Budget'

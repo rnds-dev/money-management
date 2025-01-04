@@ -4,8 +4,9 @@ import { DataService } from 'src/app/services/data.service';
 import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
-  selector: 'app-account-view',
-  templateUrl: './account-view.component.html',
+    selector: 'app-account-view',
+    templateUrl: './account-view.component.html',
+    standalone: false
 })
 export class AccountViewComponent implements OnInit{
   account!: IAccount

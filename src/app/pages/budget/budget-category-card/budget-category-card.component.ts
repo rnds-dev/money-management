@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { ITransactionCategory } from 'src/app/models/transaction';
 
 @Component({
-  selector: 'app-budget-category-card',
-  templateUrl: './budget-category-card.component.html',
-  styleUrls: ['./budget-category-card.component.scss']
+    selector: 'app-budget-category-card',
+    templateUrl: './budget-category-card.component.html',
+    styleUrls: ['./budget-category-card.component.scss'],
+    standalone: false
 })
 export class BudgetCategoryCardComponent {
   @Input() category!: ITransactionCategory

@@ -5,8 +5,9 @@ import { IAccountType } from 'src/app/models/account';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
-  selector: 'app-account-create',
-  templateUrl: './account-create.component.html',
+    selector: 'app-account-create',
+    templateUrl: './account-create.component.html',
+    standalone: false
 })
 export class AccountCreateComponent implements OnInit{
 

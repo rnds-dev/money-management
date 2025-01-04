@@ -2,9 +2,10 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Chart } from 'chart.js';
 
 @Component({
-  selector: 'app-progress-bar-chart',
-  templateUrl: './progress-bar-chart.component.html',
-  styleUrls: ['./progress-bar-chart.component.scss']
+    selector: 'app-progress-bar-chart',
+    templateUrl: './progress-bar-chart.component.html',
+    styleUrls: ['./progress-bar-chart.component.scss'],
+    standalone: false
 })
 export class ProgressBarChartComponent implements OnInit {
 

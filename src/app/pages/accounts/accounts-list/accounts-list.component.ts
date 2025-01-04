@@ -6,8 +6,9 @@ import { ModalService } from 'src/app/services/modal.service';
 import { TransactionDataService } from 'src/app/services/transaction-data.service';
 
 @Component({
-  selector: 'app-accounts-list',
-  templateUrl: './accounts-list.component.html',
+    selector: 'app-accounts-list',
+    templateUrl: './accounts-list.component.html',
+    standalone: false
 })
 export class AccountsListComponent {
   accounts$!: Observable<IAccount[]>

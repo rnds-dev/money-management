@@ -6,8 +6,9 @@ import { DateService } from 'src/app/services/date.service';
 import { TransactionDataService } from 'src/app/services/transaction-data.service';
 
 @Component({
-  selector: 'app-transactions-list',
-  templateUrl: './transactions-list.component.html',
+    selector: 'app-transactions-list',
+    templateUrl: './transactions-list.component.html',
+    standalone: false
 })
 export class TransactionsListComponent implements OnInit {
   groupedTransactions: TransactionsByDate[] = []

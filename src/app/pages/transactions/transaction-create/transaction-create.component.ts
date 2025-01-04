@@ -5,8 +5,9 @@ import { DateService } from 'src/app/services/date.service';
 import { TransactionDataService } from 'src/app/services/transaction-data.service';
 
 @Component({
-  selector: 'app-transaction-create',
-  templateUrl: './transaction-create.component.html',
+    selector: 'app-transaction-create',
+    templateUrl: './transaction-create.component.html',
+    standalone: false
 })
 export class TransactionCreateComponent {
   newTransaction: FormGroup = new FormGroup({

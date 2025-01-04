@@ -4,8 +4,9 @@ import { ITypeStats } from 'src/app/models/transaction';
 import { StatsService } from 'src/app/services/stats.service';
 
 @Component({
-  selector: 'app-total',
-  templateUrl: './total.component.html',
+    selector: 'app-total',
+    templateUrl: './total.component.html',
+    standalone: false
 })
 export class TotalComponent implements OnInit {
   @Input() selectedPeriod: FormGroup = new FormGroup({})

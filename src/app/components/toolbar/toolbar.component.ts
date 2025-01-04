@@ -3,8 +3,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { DateService } from 'src/app/services/date.service';
 
 @Component({
-  selector: 'app-toolbar',
-  templateUrl: './toolbar.component.html',
+    selector: 'app-toolbar',
+    templateUrl: './toolbar.component.html',
+    standalone: false
 })
 export class ToolbarComponent implements OnInit {
 

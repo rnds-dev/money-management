@@ -5,8 +5,9 @@ Chart.register(...registerables);
 
 
 @Component({
-  selector: 'app-bar-chart',
-  templateUrl: './bar-chart.component.html',
+    selector: 'app-bar-chart',
+    templateUrl: './bar-chart.component.html',
+    standalone: false
 })
 export class BarChartComponent implements OnInit, OnChanges {
 

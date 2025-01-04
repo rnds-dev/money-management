@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-dropdown',
-  templateUrl: './dropdown.component.html',
-  styleUrls: ['./dropdown.component.scss']
+    selector: 'app-dropdown',
+    templateUrl: './dropdown.component.html',
+    styleUrls: ['./dropdown.component.scss'],
+    standalone: false
 })
 export class DropdownComponent {
   @Input() title: string = "Title"

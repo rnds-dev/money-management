@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { TransactionDataService } from 'src/app/services/transaction-data.service';
 
 @Component({
-  selector: 'app-total-sum',
-  templateUrl: './total-sum.component.html',
-  styleUrls: ['./total-sum.component.scss']
+    selector: 'app-total-sum',
+    templateUrl: './total-sum.component.html',
+    styleUrls: ['./total-sum.component.scss'],
+    standalone: false
 })
 export class TotalSumComponent implements OnInit {
   public amount: number = 0

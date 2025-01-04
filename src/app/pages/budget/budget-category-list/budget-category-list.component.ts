@@ -6,8 +6,9 @@ import { StatsService } from 'src/app/services/stats.service';
 import { TransactionDataService } from 'src/app/services/transaction-data.service';
 
 @Component({
-  selector: 'app-budget-category-list',
-  templateUrl: './budget-category-list.component.html',
+    selector: 'app-budget-category-list',
+    templateUrl: './budget-category-list.component.html',
+    standalone: false
 })
 export class BudgetCategoryListComponent {
   @Input() selectedPeriod: FormGroup = new FormGroup({
