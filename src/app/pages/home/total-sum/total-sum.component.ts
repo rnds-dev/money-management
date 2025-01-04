@@ -14,8 +14,10 @@ export class TotalSumComponent implements OnInit {
   constructor(private transactionDataService: TransactionDataService) { }
 
   ngOnInit(): void {
-    this.transactionDataService.getAccounts.forEach(account => {
-      this.amount += account.sum
-    })
+    this.transactionDataService
+      .getAccountsObservable()
+      .subscribe((accounts) => {
+        this.amount = accounts.reduce((sum, account) => sum + account.sum, 0)
+      })
   }
 }

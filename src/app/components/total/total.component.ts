@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ITypeStats } from 'src/app/models/transaction';
 import { StatsService } from 'src/app/services/stats.service';
@@ -22,6 +22,6 @@ export class TotalComponent implements OnInit {
   }
 
   getStats(){
-    this.stats = this.statsService.getTypeStats(this.selectedPeriod)
+    this.stats = this.statsService.getTypeStats(this.selectedPeriod) 
   }
 }

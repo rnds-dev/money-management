@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ICategoryStats, ITransaction, ITransactionCategory, ITransactionType, ITypeStats } from '../models/transaction';
+import { ICategoryStats, ITransaction, ITypeStats } from '../models/transaction';
 import { DataService } from './data.service';
-import { IAccount } from '../models/account';
 import { TransactionDataService } from './transaction-data.service';
 
 @Injectable({
@@ -16,15 +15,17 @@ export class StatsService {
 
   public getTotal(): number {
     let amount: number = 0
-    this.transactionDataService.getAccounts.forEach(account => {
-      amount += account.sum
-    })
+    this.transactionDataService.getAccountsObservable().subscribe(accounts =>
+      accounts.reduce((sum, account) => account.sum + sum, 0)
+    )
     return amount
   }
 
   private setZeroTypeStats(stats: ITypeStats): ITypeStats {
-    this.transactionDataService.getTypes.forEach(type => {
-      stats[type.name] = 0
+    this.transactionDataService.getTypesObservable().subscribe(types => {
+      types.forEach(type => {
+        stats[type.name] = 0
+      })
     })
     return stats
   }
@@ -32,11 +33,13 @@ export class StatsService {
   public getTypeStats(params: FormGroup): ITypeStats {
     var stats: ITypeStats = {}
 
+    stats = this.setZeroTypeStats(stats)
+
     this.dataService.getAll("transactions").subscribe((transactions: ITransaction[]) => {
       transactions.forEach(transaction => {
-        if (transaction.date && (
-          transaction.date < params.value.startDate ||
-          transaction.date > params.value.endDate)) return
+        if (transaction.date &&
+          (transaction.date < params.value.startDate ||
+            transaction.date > params.value.endDate)) return
 
         if (stats[transaction.type]) {
           stats[transaction.type] += transaction.sum

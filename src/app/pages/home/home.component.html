@@ -4,10 +4,10 @@
 <app-total [selectedPeriod]="selectedPeriod"></app-total>
 
 <div class="container">
-<select name="" id="" [(ngModel)]="type">
-  <option value="Budget">Budget</option>
-  <option value="Chart">Chart</option>
-</select>
+  <select name="" id="" [(ngModel)]="type">
+    <option value="Budget">Budget</option>
+    <option value="Chart">Chart</option>
+  </select>
 </div>
 
 <app-budget *ngIf="type=='Budget'" [selectedPeriod]="selectedPeriod"></app-budget>

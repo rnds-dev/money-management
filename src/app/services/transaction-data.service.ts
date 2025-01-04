@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IAccount } from '../models/account';
-import { ITransactionCategory, ITransactionType } from '../models/transaction';
+import { ITransactionCategory, ITransactionType, ITypeStats } from '../models/transaction';
 import { DataService } from './data.service';
 import { Observable, shareReplay } from 'rxjs';
 
@@ -30,6 +30,15 @@ export class TransactionDataService {
     return this.accounts
   }
 
+  public getAccountsObservable() : Observable<IAccount[]> {
+    if (!this.accountsRequest$) {
+      this.accountsRequest$ = this.dataService.getAll("accounts").pipe(
+        shareReplay({ bufferSize: 1, refCount: true })
+      )
+    }
+    return this.accountsRequest$
+  }
+
   public get getTypes() {
     if (!this.typesRequest$) {
       this.typesRequest$ = this.dataService.getAll("transaction_types").pipe(
@@ -41,6 +50,15 @@ export class TransactionDataService {
       this.typesRequest$.subscribe(body => this.types = body)
     }
     return this.types
+  }
+
+  public getTypesObservable() : Observable<ITransactionType[]> {
+    if (!this.typesRequest$) {
+      this.typesRequest$ = this.dataService.getAll("transaction_types").pipe(
+        shareReplay({ bufferSize: 1, refCount: true })
+      )
+    }
+    return this.typesRequest$
   }
 
   public get getCategories() {
