@@ -11,8 +11,6 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   public getAll(link: string) {
-    console.trace(link);
-    
     return this.http.get<any>(this.url + link)
   }
 
