@@ -16,7 +16,7 @@ Here is the financial result for the last month (or another selected period). By
 1. **budget item** (which categories have a limit, what is the result, is there an excess)
 2. **income or expense chart by category**
 
-![dashboard](/assets/previews/dashboard.png)
+![dashboard](https://github.com/rnds-dev/money-management/blob/main/assets/previews/dashboard.png)
 
 ### Transactions
 Transactions consist of fields:
@@ -41,6 +41,7 @@ Accounts can be created / deleted / edited
 
 ![accounts](/assets/previews/accounts.png)
 
+
 ### Settings (Accounts)
 Here you can manage existing categories or add new ones.
 
@@ -52,7 +53,7 @@ Here you can manage existing categories or add new ones.
 ```
 git clone https://github.com/rnds-dev/money-management.git
 ```
-2. Deploy project from folder ```/dist/money-management``` on your server
+2. Deploy project from folder ```/dist/money-management/browser``` on your server
 3. Follow the link (for example: [https://money-management-app/](https://money-management-app/))
 
 
@@ -63,9 +64,9 @@ git clone https://github.com/rnds-dev/money-management.git
 ```
 2. Prepare local development environment [[Angular docs](https://v17.angular.io/tutorial/first-app#local-development-environment)]
 3. Install [Node.js](https://nodejs.org/en/download/)
-4. Install Angular CLI v16
+4. Install Angular CLI
 ```
-npm install -g @angular/cli@16.0.2
+npm install -g @angular/cli
 ```
 3. Start project in terminal
 `````
