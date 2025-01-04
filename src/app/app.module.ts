@@ -1,7 +1,7 @@
 //modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -46,47 +46,40 @@ import { TotalSumComponent } from './pages/home/total-sum/total-sum.component';
 
 
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    AccountComponent,
-    AccountCreateComponent,
-    AccountCardComponent,
-    AccountViewComponent,
-    TransactionComponent,
-    TransactionCreateComponent,
-    TransactionCardComponent,
-    HomeComponent,
-    ModalComponent,
-    TransactionsListComponent,
-    TitlePageComponent,
-    AccountsListComponent,
-    BarChartComponent,
-    DropdownComponent,
-    BudgetComponent,
-    BudgetCategoryListComponent,
-    BudgetCategoryCardComponent,
-    ToolbarComponent,
-    TotalComponent,
-    ChartStatsComponent,
-    SettingsComponent,
-    CategoriesComponent,
-    CategoryCardComponent,
-    CategoryCreateComponent,
-    CategoriesListComponent,
-    ProgressBarChartComponent,
-    BudgetTotalComponent,
-    TotalSumComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        AccountComponent,
+        AccountCreateComponent,
+        AccountCardComponent,
+        AccountViewComponent,
+        TransactionComponent,
+        TransactionCreateComponent,
+        TransactionCardComponent,
+        HomeComponent,
+        ModalComponent,
+        TransactionsListComponent,
+        TitlePageComponent,
+        AccountsListComponent,
+        BarChartComponent,
+        DropdownComponent,
+        BudgetComponent,
+        BudgetCategoryListComponent,
+        BudgetCategoryCardComponent,
+        ToolbarComponent,
+        TotalComponent,
+        ChartStatsComponent,
+        SettingsComponent,
+        CategoriesComponent,
+        CategoryCardComponent,
+        CategoryCreateComponent,
+        CategoriesListComponent,
+        ProgressBarChartComponent,
+        BudgetTotalComponent,
+        TotalSumComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { 
 }
